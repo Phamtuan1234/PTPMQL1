@@ -1,11 +1,41 @@
-<form asp-action="Index">
-    <label for="Fullname">Tên:</label>
-    <input type="text" id="Fullname" name="Fullname" />
+@model IEnumerable<MvcMovie.Models.Entities.Employee>
 
-    <label for="City">Thành phố:</label>
-    <input type="text" id="City" name="City" />
+@{
+    ViewData["Title"] = "Index";
+}
 
-    <input type="submit" value="Gửi" />
-</form>
+<h1>Index</h1>
 
-<h1>@ViewBag.thongBao</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeAge)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeAge)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
